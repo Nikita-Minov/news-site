@@ -1,0 +1,40 @@
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from 'passport';
+import User from './models/users.model.js';
+import usersRouter from './routes/usersRouter.js';
+import dotenv from 'dotenv';
+const app = express();
+dotenv.config();
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+app.use('/api/v1/', usersRouter);
+
+mongoose.connect(process.env.DB_URL).then(()=>{
+  console.log('DB connected!');
+}).catch((err)=>(console.log(err)));
+
+app.listen(process.env.PORT, ()=>{
+  console.log('Server has been started on port ' + process.env.PORT);
+});

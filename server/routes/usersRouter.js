@@ -1,38 +1,34 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/user.model');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+import express from 'express';
+const router = new express.Router();
+import passport from 'passport';
+import LocalStrategy from 'passport-local';
+import User from '../models/users.model.js';
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+import usersController from '../controllers/UsersController.js';
+import authController from '../controllers/AuthController.js';
+LocalStrategy.Strategy;
+dotenv.config();
 
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+      User.findOne({username: username}, function(err, user) {
+        if (err) done(err);
+        if (!user) done(null, false, {message: 'Incorrect username.'});
+        bcrypt.compare(password, user.password, function(err, result) {
+          if (!result) done(null, false, {message: 'Incorrect password.'});
+        });
+        return done(null, user);
+      });
+    },
+));
 router.route('/users')
-  .post(async (req, res) => {
-    const userExists = await User.findOne({ username: req.body.username });
-    if(userExists) return res.status(409).json({message: 'This user already exists!'})
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-      const user = new User({username: req.body.username, password: hash, userId: Math.floor(Math.random() * 10000000)});
-      user.save((err)=> {
-        if(err) console.log(err.message);
-      });
-    });
-    res.status(201).json({message: 'User registered successfully!'});
-  })
-  .put(async (req, res) => {
-    const userExists = await User.findOne({ userId: req.userId});
-    if(!userExists) return res.status(404).json({message: 'User is not found!'})
-    if(req.body.password) {
-      bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
-        await User.findOneAndUpdate({userId: req.userId}, {password: hash});
-      });
-    }
-    await User.findOneAndUpdate({userId: req.userId}, {username: req.body.username, email: req.body.email});
-    res.status(200).json({message: 'Data changed successfully!'})
-  })
-  .delete(async (req, res) => {
-    const userId = '1886968';
-    const userExists = await User.findOne({ userId: userId});
-    if(!userExists) return res.status(404).json({message: 'User is not found!'})
-    await User.findOneAndDelete({userId: userId});
-    res.status(200).json({message: 'User deleted successfully!'});
-  })
+    .get(usersController.getMe)
+    .post(usersController.createUser)
+    .put(usersController.changeMe)
+    .delete(usersController.deleteUser);
 
-module.exports = router;
+router.route('/auth')
+    .post(passport.authenticate('local'), authController.login)
+    .delete(authController.logout);
+export default router;
