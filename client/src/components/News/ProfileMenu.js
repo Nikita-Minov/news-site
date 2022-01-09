@@ -6,12 +6,13 @@ import ProfileBar from './ProfileBar';
 const ProfileMenu = () => {
   const [profileBar, showProfileBar] = useState(0);
   return (
-    <ProfileArea>
+    <ProfileArea
+      onMouseEnter={()=> showProfileBar(1)}
+      onMouseLeave={()=> showProfileBar(0)}>
       <ProfileAreaLink>
         <ProfileAreaImg
           src={profileIcon}
-          alt="profileIcon"
-          onClick={()=>profileBar?showProfileBar(0):showProfileBar(1)}/>
+          alt="profileIcon"/>
         {profileBar?<ProfileBar/>:<></>}
       </ProfileAreaLink>
     </ProfileArea>

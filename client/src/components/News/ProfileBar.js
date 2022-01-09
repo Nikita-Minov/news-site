@@ -1,32 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {logout} from '../../redux/usersReducer';
 
-const ProfileBar = () => {
-  const isRegistered = false;
-  const registeredLinks = [
-    {name: 'Профиль', url: '/profile'},
-    {name: 'Закладки', url: '/bookmarks'},
-    {name: 'Выход', url: '/logout'},
+const ProfileBar = ({isAuth, username, logout}) => {
+  /* eslint react/prop-types: 0 */
+  const authorizedLinks = [
+    {name: username, url: '/profile', func: 0},
+    {name: 'Закладки', url: '/bookmarks', func: 0},
+    {name: 'Выход', url: '/logout', func: logout},
   ];
-  const noRegisteredLinks = [
-    {name: 'Войти', url: '/login'},
-    {name: 'Регистрация', url: '/register'},
+  const noAuthorizedLinks = [
+    {name: 'Войти', url: '/login', func: 0},
+    {name: 'Регистрация', url: '/register', func: 0},
   ];
   return (
     <ProfileBarWrapper>
       <ProfileBarMenu>
         {
-          isRegistered?(registeredLinks.map((el, id) => {
+          isAuth?(authorizedLinks.map((el, id) => {
             return (
               <ProfileBarMenuItem key={id}>
-                <StyledLink to={el.url}>
+                <StyledLink to={el.url} onClick={el.func}>
                   {el.name}
                 </StyledLink>
               </ProfileBarMenuItem>
             );
           })):
-          (noRegisteredLinks.map((el, id) => {
+          (noAuthorizedLinks.map((el, id) => {
             return (
               <ProfileBarMenuItem key={id}>
                 <StyledLink to={el.url}>
@@ -40,6 +42,15 @@ const ProfileBar = () => {
     </ProfileBarWrapper>
   );
 };
+
+const mstp = (state) => ({
+  isAuth: state.usersReducer.isAuth,
+  username: state.usersReducer.userInfo.username,
+});
+
+const ProfileBarContainer = connect(mstp, {
+  logout,
+})(ProfileBar);
 
 const ProfileBarWrapper = styled.div`
   width: 150px;
@@ -82,4 +93,4 @@ const StyledLink = styled(Link)`
   color: #000000;
 `;
 
-export default ProfileBar;
+export default ProfileBarContainer;

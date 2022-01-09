@@ -1,11 +1,13 @@
 import userService from '../services/UserService.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 class UsersController {
   async getMe(req, res) {
     try {
       const result = await userService.getMe(req.user);
       res.status(result.status).json({message: result.message,
-        username: result.username});
+        user: {username: result.username, userId: result.userId}});
     } catch (err) {
       console.log(err);
     }

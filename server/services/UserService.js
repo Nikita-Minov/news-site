@@ -8,7 +8,9 @@ class UserService {
     if (!user) {
       return {status: 404, message: 'You are not authorized!'};
     }
-    return {status: 200, message: 'User found!', username: user.username};
+    return {status: 200, message: 'User found!',
+      userId: user.userId,
+      username: user.username};
   }
   async createUser(username, password) {
     const userExists = await User.findOne({username});

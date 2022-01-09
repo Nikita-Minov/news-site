@@ -7,17 +7,14 @@ import passport from 'passport';
 import User from './models/users.model.js';
 import usersRouter from './routes/usersRouter.js';
 import dotenv from 'dotenv';
+import cors from 'cors';
 const app = express();
 dotenv.config();
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -29,7 +26,19 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/api/v1/', usersRouter);
+
 
 mongoose.connect(process.env.DB_URL).then(()=>{
   console.log('DB connected!');
