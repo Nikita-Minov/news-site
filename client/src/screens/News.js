@@ -1,24 +1,43 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import NewsItem from '../components/News/NewsItem';
-const News = () => {
+import {getPosts} from '../redux/postsReducer';
+import {getMe} from '../redux/usersReducer';
+import {connect} from 'react-redux';
+const News = ({getPosts, posts, getMe}) => {
   useEffect(() => {
     document.title = 'News';
   });
   return (
     <NewsWrapper>
-      <NewsItem/>
+      {posts.map((el, id) => {
+        return (<NewsItem
+          key={id}
+          postTitle={el.postTitle}
+          postText={el.postText}
+          postId={el.postId}
+          creatorName={el.creatorName}
+        />);
+      })}
     </NewsWrapper>
   );
 };
 
+const mstp = (state) => ({
+  posts: state.postsReducer.posts,
+});
+
+const NewsContainer = connect(mstp, {
+  getPosts,
+  getMe,
+})(News);
+
 const NewsWrapper = styled.div`
   width: 70%;
-  height: 1vh;
+  height: 800px;
   margin: auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 `;
 
-export default News;
+export default NewsContainer;

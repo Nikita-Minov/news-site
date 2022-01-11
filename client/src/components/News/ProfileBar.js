@@ -9,7 +9,7 @@ const ProfileBar = ({isAuth, username, logout}) => {
   const authorizedLinks = [
     {name: username, url: '/profile', func: 0},
     {name: 'Закладки', url: '/bookmarks', func: 0},
-    {name: 'Выход', url: '/logout', func: logout},
+    {name: 'Выход', url: '/', func: logout},
   ];
   const noAuthorizedLinks = [
     {name: 'Войти', url: '/login', func: 0},

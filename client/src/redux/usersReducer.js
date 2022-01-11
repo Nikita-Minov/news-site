@@ -45,16 +45,20 @@ export const setLogin = (status) => {
 };
 
 export const createUser = (username, password) => async (dispatch) => {
-  const result = await usersAPI.createAccount(username, password);
-  console.log(username + password);
-  console.log(result);
+  await usersAPI.createAccount(username, password);
 };
 
 export const login = (username, password) => async (dispatch) => {
   await usersAPI.login(username, password);
+  await getMe();
+};
+
+export const getMe = () => async (dispatch) => {
   const result = await usersAPI.getMe();
-  dispatch(setUser(result.user));
-  dispatch(setLogin(true));
+  if (result.user) {
+    dispatch(setUser(result.user));
+    dispatch(setLogin(true));
+  }
 };
 
 export const logout = () => async (dispatch) => {

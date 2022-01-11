@@ -1,4 +1,4 @@
-import User from '../models/users.model.js';
+import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -6,11 +6,10 @@ dotenv.config();
 class UserService {
   async getMe(user) {
     if (!user) {
-      return {status: 404, message: 'You are not authorized!'};
+      return {status: 200, message: 'You are not authorized!', user: null};
     }
-    return {status: 200, message: 'User found!',
-      userId: user.userId,
-      username: user.username};
+    return {status: 200, message: 'User found!', user: {userId: user.userId,
+      username: user.username}};
   }
   async createUser(username, password) {
     const userExists = await User.findOne({username});

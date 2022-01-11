@@ -1,4 +1,4 @@
-import userService from '../services/UserService.js';
+import userService from '../services/userService.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -7,7 +7,7 @@ class UsersController {
     try {
       const result = await userService.getMe(req.user);
       res.status(result.status).json({message: result.message,
-        user: {username: result.username, userId: result.userId}});
+        user: result.user});
     } catch (err) {
       console.log(err);
     }

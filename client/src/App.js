@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,8 +8,17 @@ import Header from './components/Header';
 import News from './screens/News';
 import Register from './screens/Register';
 import Login from './screens/Login';
+import {connect} from 'react-redux';
+import {getPosts} from './redux/postsReducer';
+import {getMe} from './redux/usersReducer';
 /* eslint-disable require-jsdoc */
-function App() {
+function App({getPosts, getMe}) {
+  useEffect(() => {
+    return getPosts();
+  }, []);
+  useEffect(() => {
+    return getMe();
+  }, []);
   return (
     <Router>
       <Header/>
@@ -23,4 +32,9 @@ function App() {
     </Router>
   );
 }
-export default App;
+
+const AppContainer = connect(null, {
+  getPosts,
+  getMe,
+})(App);
+export default AppContainer;

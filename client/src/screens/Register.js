@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import RegisterForm from '../components/Register/RegisterForm';
+import {connect} from 'react-redux';
+import {Navigate} from 'react-router-dom';
 
-const Register = () => {
+const Register = ({isAuth}) => {
   useEffect(() => {
     document.title = 'Registration';
   });
-  return (
+  return (isAuth? <Navigate to='/'/>:
     <RegisterWrapper>
       <RegisterTitle>
         REGISTRATION
@@ -33,4 +35,10 @@ const RegisterTitle = styled.h1`
   margin-bottom: 70px;
 `;
 
-export default Register;
+const mstp = (state) => ({
+  isAuth: state.usersReducer.isAuth,
+});
+
+const RegisterContainer = connect(mstp, {})(Register);
+
+export default RegisterContainer;

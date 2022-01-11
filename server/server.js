@@ -4,8 +4,10 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
-import User from './models/users.model.js';
+import User from './models/User.js';
 import usersRouter from './routes/usersRouter.js';
+import authRouter from './routes/authRouter.js';
+import postsRouter from './routes/postsRouter.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 const app = express();
@@ -38,6 +40,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api/v1/', usersRouter);
+app.use('/api/v1/', authRouter);
+app.use('/api/v1/', postsRouter);
 
 
 mongoose.connect(process.env.DB_URL).then(()=>{

@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import LoginForm from '../components/Login/LoginForm';
+import {connect} from 'react-redux';
+import {Navigate} from 'react-router';
 
-const Login = () => {
+const Login = ({isAuth}) => {
   useEffect(() => {
     document.title = 'Login';
   });
-  return (
+  return (isAuth? <Navigate to='/'/>:
     <LoginWrapper>
       <LoginTitle>
         LOGIN
@@ -15,6 +17,12 @@ const Login = () => {
     </LoginWrapper>
   );
 };
+
+const mstp = (state) => ({
+  isAuth: state.usersReducer.isAuth,
+});
+
+const LoginContainer = connect(mstp, {})(Login);
 
 const LoginWrapper = styled.div`
   width: 100%;
@@ -33,4 +41,4 @@ const LoginTitle = styled.h1`
   margin-bottom: 70px;
 `;
 
-export default Login;
+export default LoginContainer;

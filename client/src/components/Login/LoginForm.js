@@ -2,14 +2,16 @@ import React from 'react';
 import {Formik} from 'formik';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {login} from '../../redux/usersReducer';
+import {login, getMe} from '../../redux/usersReducer';
 
-const LoginForm = ({login}) => {
+const LoginForm = ({login, getMe}) => {
   return (
     <Formik
       initialValues={{username: '', password: ''}}
-      onSubmit={(values) => {
-        login(values.username, values.password);
+      onSubmit={async (values, {resetForm}) => {
+        await login(values.username, values.password);
+        await getMe();
+        resetForm();
       }}
     >
       {({values, handleSubmit, handleChange}) => (
@@ -39,6 +41,7 @@ const LoginForm = ({login}) => {
 
 const LoginFormContainer = connect(null, {
   login,
+  getMe,
 })(LoginForm);
 
 const InputArea = styled.form`

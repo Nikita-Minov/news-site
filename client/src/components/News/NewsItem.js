@@ -5,21 +5,21 @@ import calendarIcon from '../../img/calendar.svg';
 import likeIcon from '../../img/like.svg';
 import viewIcon from '../../img/view.svg';
 
-const NewsItem = () => {
+const NewsItem = ({postTitle, postText, postId, creatorName}) => {
   return (
     <NewsItemWrapper>
       <NewsItemContent>
         <NewsItemHeader>
           <NewsItemTitle>
-            News Name
+            {postTitle}
           </NewsItemTitle>
           <NewsItemArticle>
-            Article Name
+            {creatorName}
           </NewsItemArticle>
         </NewsItemHeader>
         <NewsItemBody>
           <NewsText>
-            News Text
+            {postText}
           </NewsText>
         </NewsItemBody>
         <NewsItemBottom>
@@ -49,6 +49,7 @@ const NewsItemWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
 `;
 
 const NewsItemContent = styled.div`
