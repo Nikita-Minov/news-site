@@ -29,8 +29,13 @@ export const setPosts = (posts) => {
 
 export const getPosts = () => async (dispatch) => {
   const result = await postsAPI.getPosts();
-  console.log(result.posts);
   dispatch(setPosts(result.posts));
+};
+
+export const createPost = (postTitle,
+    postText, creatorId) => async (dispatch) => {
+  await postsAPI.createPost(postTitle, postText, creatorId);
+  await getPosts();
 };
 
 

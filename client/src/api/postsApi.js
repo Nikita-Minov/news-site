@@ -16,4 +16,14 @@ export const postsAPI = {
           console.log(err);
         });
   },
+  createPost(postTitle, postText, creatorId) {
+    return instance
+        .post('/posts', {postTitle, postText, creatorId})
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  },
 };
