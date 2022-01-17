@@ -1,9 +1,11 @@
 import {postsAPI} from '../api/postsApi';
 
 const SET_POSTS = 'SET_POSTS';
+const SET_POST = 'SET_POST';
 
 const initialState = {
   posts: [],
+  currentPost: {},
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -12,6 +14,12 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: action.posts,
+      };
+    }
+    case SET_POST: {
+      return {
+        ...state,
+        currentPost: action.post,
       };
     }
     default: {
@@ -27,9 +35,21 @@ export const setPosts = (posts) => {
   };
 };
 
+export const setPost = (post) => {
+  return {
+    type: SET_POST,
+    post,
+  };
+};
+
 export const getPosts = () => async (dispatch) => {
   const result = await postsAPI.getPosts();
   dispatch(setPosts(result.posts));
+};
+
+export const getPost = (postId) => async (dispatch) => {
+  const result = await postsAPI.getPost(postId);
+  dispatch(setPost(result.post));
 };
 
 export const createPost = (postTitle,

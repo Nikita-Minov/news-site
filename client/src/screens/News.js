@@ -8,12 +8,14 @@ import AddPostWindow from '../components/News/AddPostWindow';
 const News = ({posts, isAuth}) => {
   const [addPostStatus, addPostStatusSet] = useState(0);
   useEffect(() => {
-    document.title = 'News';
+    document.title = 'Новости';
   });
   return (
     <NewsWrapper>
       {isAuth?
-  <AddNewsBtn onClick={() => addPostStatusSet(1)}>Add news</AddNewsBtn>: <></>}
+  <AddNewsBtn onClick={() => addPostStatusSet(1)}>
+    Добавить новость
+  </AddNewsBtn>: <></>}
       {posts.map((el, id) => {
         return (<NewsItem
           key={id}

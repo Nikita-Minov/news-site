@@ -1,6 +1,7 @@
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+import postsService from './postsService.js';
 dotenv.config();
 
 class UserService {
@@ -36,7 +37,7 @@ class UserService {
         });
     return {status: 201, message: 'User registered successfully!'};
   }
-  async changeMe(userId, password, email, username) { // TODO: Redo function
+  async changeMe({userId, password, email, username}) { // TODO: Redo function
     const userExists = await User.findOne({userId});
     if (!userExists) return {status: 404, message: 'User is not found!'};
     if (password) {
@@ -47,7 +48,11 @@ class UserService {
             await User.findOneAndUpdate(userId, {password: hash});
           });
     }
-    await User.findOneAndUpdate(userId, {username, email});
+    if (email) await User.findOneAndUpdate(userId, {email});
+    if (username) {
+      await User.findOneAndUpdate(userId, {username});
+      await postsService.changePost({creatorName: username});
+    }
     return {status: 200, message: 'Data changed successfully!'};
   }
   async deleteUser(userId) {

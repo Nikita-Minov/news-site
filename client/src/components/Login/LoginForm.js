@@ -19,19 +19,19 @@ const LoginForm = ({login, getMe}) => {
           <StyledInput
             type="text"
             name="username"
-            placeholder="USERNAME"
+            placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ"
             onChange={handleChange}
             value={values.username}
           />
           <StyledInput
             type="text"
             name="password"
-            placeholder="PASSWORD"
+            placeholder="ПАРОЛЬ"
             onChange={handleChange}
             value={values.password}
           />
           <SubmitButton type="submit">
-            SUBMIT
+            ОТПРАВИТЬ
           </SubmitButton>
         </InputArea>
       )}

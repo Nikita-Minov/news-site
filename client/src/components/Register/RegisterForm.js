@@ -21,7 +21,7 @@ const RegisterForm = ({createUser}) => {
           <StyledInput
             type="text"
             name="username"
-            placeholder="USERNAME"
+            placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ"
             id="username"
             onChange={handleChange}
             value={values.username}
@@ -30,17 +30,17 @@ const RegisterForm = ({createUser}) => {
           <StyledInput
             type="text"
             name="password"
-            placeholder="PASSWORD"
+            placeholder="ПАРОЛЬ"
             id="password"
             onChange={handleChange}
             value={values.password}
           />
           {errors.username || errors.password?
           (<SubmitButton type="submit" disabled>
-            SUBMIT
+            ОТПРАВИТЬ
           </SubmitButton>):
           (<SubmitButton type="submit">
-          SUBMIT
+          ОТПРАВИТЬ
           </SubmitButton>)}
         </InputArea>
       )}

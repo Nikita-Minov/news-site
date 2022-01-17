@@ -19,7 +19,7 @@ const AddPostForm = ({createPost, creatorId, addPostStatusSet, getPosts}) => {
   });
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
-      <InputLabel htmlFor="postName">News name</InputLabel>
+      <InputLabel htmlFor="postName">Название</InputLabel>
       <PostNameInput
         id="postName"
         name="postName"
@@ -28,7 +28,7 @@ const AddPostForm = ({createPost, creatorId, addPostStatusSet, getPosts}) => {
         value={formik.values.postName}
       />
 
-      <InputLabel htmlFor="lastName">News text</InputLabel>
+      <InputLabel htmlFor="lastName">Содержимое</InputLabel>
       <PostTextArea
         id="postText"
         name="postText"
@@ -37,7 +37,7 @@ const AddPostForm = ({createPost, creatorId, addPostStatusSet, getPosts}) => {
         value={formik.values.postText}
       />
 
-      <PostSendBtn type="submit">Send</PostSendBtn>
+      <PostSendBtn type="submit">Отправить</PostSendBtn>
     </StyledForm>
   );
 };

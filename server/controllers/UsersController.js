@@ -23,8 +23,9 @@ class UsersController {
   }
   async changeMe(req, res) {
     try {
-      const result = await userService.changeMe(req.body.userId,
-          req.body.password, req.body.email, req.body.username);
+      const result = await userService.changeMe({userId: req.body.userId,
+        password: req.body.password,
+        email: req.body.email, username: req.body.username});
       res.status(result.status).json({message: result.message});
     } catch (err) {
       console.log(err);

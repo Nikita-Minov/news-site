@@ -6,5 +6,8 @@ router.route('/posts')
     .post(postsController.createPost)
     .put(postsController.changePost)
     .delete(postsController.deletePost);
+router.post('/post', postsController.getPost);
+router.route('/comments');
+
 
 export default router;

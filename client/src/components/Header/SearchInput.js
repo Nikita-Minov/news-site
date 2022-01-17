@@ -28,7 +28,7 @@ const SearchInput = () => {
 };
 
 const InputArea = styled.form`
-  width: 10%;
+  width: 20%;
   height: 100%;
   display: flex;
   justify-content: space-between;

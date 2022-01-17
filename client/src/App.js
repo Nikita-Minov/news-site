@@ -4,13 +4,14 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import News from './screens/News';
 import Register from './screens/Register';
 import Login from './screens/Login';
 import {connect} from 'react-redux';
 import {getPosts} from './redux/postsReducer';
 import {getMe} from './redux/usersReducer';
+import Post from './screens/Post';
 /* eslint-disable require-jsdoc */
 function App({getPosts, getMe}) {
   useEffect(() => {
@@ -25,9 +26,10 @@ function App({getPosts, getMe}) {
       <Routes>
         <Route path="/" element={<News/>}/>
         <Route path="/categories" element={<>Categories</>}/>
-        <Route path="/contacts" element={<>Contacts</>}/>
+        <Route path="/personal-area" element={<>Personal area</>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/posts/:postId" element={<Post/>}/>
       </Routes>
     </Router>
   );

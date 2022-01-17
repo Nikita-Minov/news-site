@@ -4,13 +4,14 @@ import commentIcon from '../../img/comment.svg';
 import calendarIcon from '../../img/calendar.svg';
 import likeIcon from '../../img/like.svg';
 import viewIcon from '../../img/view.svg';
+import {Link} from 'react-router-dom';
 
 const NewsItem = ({postTitle, postText, postId, creatorName}) => {
   return (
     <NewsItemWrapper>
       <NewsItemContent>
         <NewsItemHeader>
-          <NewsItemTitle>
+          <NewsItemTitle to={`/posts/${postId}`}>
             {postTitle}
           </NewsItemTitle>
           <NewsItemArticle>
@@ -47,6 +48,7 @@ const NewsItemWrapper = styled.div`
   background-color: #F4F4F4;
   border-radius: 30px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
@@ -81,13 +83,14 @@ const NewsItemBottom = styled.div`
   align-items: start;
 `;
 
-const NewsItemTitle = styled.a`
+const NewsItemTitle = styled(Link)`
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
   line-height: 28px;
   color: #002FD8;
+  text-decoration: none;
 `;
 
 const NewsItemArticle = styled.a`

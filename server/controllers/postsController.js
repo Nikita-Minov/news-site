@@ -20,11 +20,12 @@ class PostsController {
       console.log(err);
     }
   }
-  async changePost(req, res) { // TODO: Remake
+  async changePost(req, res) {
     try {
-      const result = await postsService.changePost(req.body.postTitle,
-          req.body.postText,
-          req.body.postId);
+      const result = await postsService.changePost({
+        postTitle: req.body.postTitle,
+        postText: req.body.postText,
+        postId: req.body.postId});
       res.status(result.status).json({message: result.message});
     } catch (err) {
       console.log(err);
@@ -38,6 +39,24 @@ class PostsController {
       console.log(err);
     }
   }
+  async getPost(req, res) {
+    try {
+      const result = await postsService.getPost({postId: req.body.postId});
+      res.status(result.status).json({message: result.message,
+        post: result.post});
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  // async getComment(req, res) {
+  //   try {
+  //     const result = await postsService.getPost({postId: req.body.postId});
+  //     res.status(result.status).json({message: result.message,
+  //       post: result.post});
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 }
 
 export default new PostsController();

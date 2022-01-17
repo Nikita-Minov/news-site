@@ -6,12 +6,12 @@ import {Navigate} from 'react-router';
 
 const Login = ({isAuth}) => {
   useEffect(() => {
-    document.title = 'Login';
+    document.title = 'Авторизация';
   });
   return (isAuth? <Navigate to='/'/>:
     <LoginWrapper>
       <LoginTitle>
-        LOGIN
+        АВТОРИЗАЦИЯ
       </LoginTitle>
       <LoginForm/>
     </LoginWrapper>

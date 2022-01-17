@@ -6,12 +6,12 @@ import {Navigate} from 'react-router-dom';
 
 const Register = ({isAuth}) => {
   useEffect(() => {
-    document.title = 'Registration';
+    document.title = 'Регистрация';
   });
   return (isAuth? <Navigate to='/'/>:
     <RegisterWrapper>
       <RegisterTitle>
-        REGISTRATION
+        РЕГИСТРАЦИЯ
       </RegisterTitle>
       <RegisterForm/>
     </RegisterWrapper>

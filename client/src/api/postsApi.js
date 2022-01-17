@@ -26,4 +26,14 @@ export const postsAPI = {
           console.log(err);
         });
   },
+  getPost(postId) {
+    return instance
+        .post('/post', {postId})
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  },
 };

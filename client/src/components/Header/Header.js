@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchInput from './News/SearchInput';
-import NavBar from './News/NavBar';
-import ProfileMenu from './News/ProfileMenu';
+import SearchInput from './SearchInput';
+import NavBar from './NavBar';
+import ProfileMenu from './ProfileMenu';
 const Header = () => {
   return (
     <HeaderWrapper>
