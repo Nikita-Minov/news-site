@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
-import ProfileMenu from './ProfileMenu';
 import NavBarContainer from './NavBarContainer';
+import ProfileMenuContainer from './ProfileMenuContainer';
 const Header = () => {
   return (
     <HeaderWrapper>
       <NavBarContainer/>
       <SearchInput />
-      <ProfileMenu />
+      <ProfileMenuContainer />
     </HeaderWrapper>
   );
 };

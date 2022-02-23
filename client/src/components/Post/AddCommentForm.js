@@ -1,16 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useFormik} from 'formik';
 
-const AddCommentForm = () => {
-  const formik = useFormik({
-    initialValues: {
-      comment: '',
-    },
-    onSubmit: async (values, {resetForm}) => {
-      alert('Comment sended!');
-    },
-  });
+const AddCommentForm = ({formik}) => {
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
       <PostNameInput

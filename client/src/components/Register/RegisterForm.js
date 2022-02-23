@@ -1,48 +1,35 @@
 import React from 'react';
-import {Formik} from 'formik';
 import styled from 'styled-components';
-import validator from '../../utils/validator';
 
-const RegisterForm = ({createUser}) => {
+const RegisterForm = ({formik}) => {
   return (
-    <Formik
-      initialValues={{username: '', password: ''}}
-      onSubmit={(values, {resetForm}) => {
-        createUser(values.username, values.password);
-        resetForm();
-      }}
-      validate={validator.registerValidator}
-    >
-      {({values, handleSubmit, handleChange, errors, touched}) => (
-        <InputArea onSubmit={handleSubmit}>
-          <StyledLabel htmlFor='username'>{errors.username}</StyledLabel>
-          <StyledInput
-            type="text"
-            name="username"
-            placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ"
-            id="username"
-            onChange={handleChange}
-            value={values.username}
-          />
-          <StyledLabel htmlFor='password'>{errors.password}</StyledLabel>
-          <StyledInput
-            type="text"
-            name="password"
-            placeholder="ПАРОЛЬ"
-            id="password"
-            onChange={handleChange}
-            value={values.password}
-          />
-          {errors.username || errors.password?
-          (<SubmitButton type="submit" disabled>
-            ОТПРАВИТЬ
-          </SubmitButton>):
-          (<SubmitButton type="submit">
-          ОТПРАВИТЬ
-          </SubmitButton>)}
-        </InputArea>
-      )}
-    </Formik>
+    <InputArea onSubmit={formik.handleSubmit}>
+      <StyledLabel htmlFor='username'>{formik.errors.username}</StyledLabel>
+      <StyledInput
+        type="text"
+        name="username"
+        placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ"
+        id="username"
+        onChange={formik.handleChange}
+        value={formik.values.username}
+      />
+      <StyledLabel htmlFor='password'>{formik.errors.password}</StyledLabel>
+      <StyledInput
+        type="text"
+        name="password"
+        placeholder="ПАРОЛЬ"
+        id="password"
+        onChange={formik.handleChange}
+        value={formik.values.password}
+      />
+      {formik.errors.username || formik.errors.password?
+      (<SubmitButton type="submit" disabled>
+        ОТПРАВИТЬ
+      </SubmitButton>):
+      (<SubmitButton type="submit">
+      ОТПРАВИТЬ
+      </SubmitButton>)}
+    </InputArea>
   );
 };
 

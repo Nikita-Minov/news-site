@@ -1,25 +1,7 @@
 import React from 'react';
-import {useFormik} from 'formik';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
-import {
-  createPost,
-  getPosts,
-} from '../../redux/reducers/postReducer/postReducer';
 
-const AddPostForm = ({createPost, creatorId, addPostStatusSet, getPosts}) => {
-  const formik = useFormik({
-    initialValues: {
-      postName: '',
-      postText: '',
-    },
-    onSubmit: async (values, {resetForm}) => {
-      await createPost(values.postName, values.postText, creatorId);
-      resetForm();
-      await getPosts();
-      addPostStatusSet(0);
-    },
-  });
+const AddPostForm = ({formik}) => {
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
       <InputLabel htmlFor="postName">Название</InputLabel>
@@ -44,15 +26,6 @@ const AddPostForm = ({createPost, creatorId, addPostStatusSet, getPosts}) => {
     </StyledForm>
   );
 };
-
-const mstp = (state) => ({
-  creatorId: state.userReducer.userInfo.userId,
-});
-
-const AddPostFormContainer = connect(mstp, {
-  createPost,
-  getPosts,
-})(AddPostForm);
 
 const StyledForm = styled.form`
   width: 100%;
@@ -97,4 +70,4 @@ const PostSendBtn = styled.button`
   }
 `;
 
-export default AddPostFormContainer;
+export default AddPostForm;

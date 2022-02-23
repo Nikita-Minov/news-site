@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import LoginForm from '../components/Login/LoginForm';
-import {connect} from 'react-redux';
 import {Navigate} from 'react-router';
+import LoginFormContainer from '../components/Login/LoginFormContainer';
 
 const Login = ({isAuth}) => {
   useEffect(() => {
@@ -13,17 +12,10 @@ const Login = ({isAuth}) => {
       <LoginTitle>
         АВТОРИЗАЦИЯ
       </LoginTitle>
-      <LoginForm/>
+      <LoginFormContainer/>
     </LoginWrapper>
   );
 };
-
-const mstp = (state) => ({
-  isAuth: state.userReducer.isAuth,
-});
-
-
-const LoginContainer = connect(mstp, {})(Login);
 
 const LoginWrapper = styled.div`
   width: 100%;
@@ -42,4 +34,4 @@ const LoginTitle = styled.h1`
   margin-bottom: 70px;
 `;
 
-export default LoginContainer;
+export default Login;

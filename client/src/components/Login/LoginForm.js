@@ -1,48 +1,29 @@
 import React from 'react';
-import {Formik} from 'formik';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
-import {login, getMe} from '../../redux/reducers/userReducer/userReducer';
 
-const LoginForm = ({login, getMe}) => {
+const LoginForm = ({formik}) => {
   return (
-    <Formik
-      initialValues={{username: '', password: ''}}
-      onSubmit={async (values, {resetForm}) => {
-        await login(values.username, values.password);
-        await getMe();
-        resetForm();
-      }}
-    >
-      {({values, handleSubmit, handleChange}) => (
-        <InputArea onSubmit={handleSubmit}>
-          <StyledInput
-            type="text"
-            name="username"
-            placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ"
-            onChange={handleChange}
-            value={values.username}
-          />
-          <StyledInput
-            type="text"
-            name="password"
-            placeholder="ПАРОЛЬ"
-            onChange={handleChange}
-            value={values.password}
-          />
-          <SubmitButton type="submit">
-            ОТПРАВИТЬ
-          </SubmitButton>
-        </InputArea>
-      )}
-    </Formik>
+    <InputArea onSubmit={formik.handleSubmit}>
+      <StyledInput
+        type="text"
+        name="username"
+        placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ"
+        onChange={formik.handleChange}
+        value={formik.values.username}
+      />
+      <StyledInput
+        type="text"
+        name="password"
+        placeholder="ПАРОЛЬ"
+        onChange={formik.handleChange}
+        value={formik.values.password}
+      />
+      <SubmitButton type="submit">
+        ОТПРАВИТЬ
+      </SubmitButton>
+    </InputArea>
   );
 };
-
-const LoginFormContainer = connect(null, {
-  login,
-  getMe,
-})(LoginForm);
 
 const InputArea = styled.form`
   width: 10%;
@@ -73,4 +54,4 @@ const SubmitButton = styled.button`
   }
 `;
 
-export default LoginFormContainer;
+export default LoginForm;

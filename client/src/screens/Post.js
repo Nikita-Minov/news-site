@@ -1,16 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {useParams} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {getPost} from '../redux/reducers/postReducer/postReducer';
 import {Link} from 'react-router-dom';
-import AddCommentForm from '../components/Post/AddCommentForm';
+import AddCommentFormContainer from
+'../components/Post/AddCommentFormContainer';
 
-const Post = ({getPost, post}) => {
-  const {postId} = useParams();
-  useEffect(() => {
-    return getPost(postId);
-  }, []);
+const Post = ({post}) => {
   return (
     <PostWrapper>
       <PostTitle>
@@ -22,18 +16,10 @@ const Post = ({getPost, post}) => {
       <PostCreator to='/profile'>
         {post.creatorName}
       </PostCreator>
-      <AddCommentForm/>
+      <AddCommentFormContainer/>
     </PostWrapper>
   );
 };
-
-const mstp = (state) => ({
-  post: state.postReducer.currentPost,
-});
-
-const PostContainer = connect(mstp, {
-  getPost,
-})(Post);
 
 const PostWrapper = styled.div`
   width: 70%;
@@ -54,4 +40,4 @@ const PostCreator = styled(Link)`
   font-family: 'Roboto', sans-serif;
 `;
 
-export default PostContainer;
+export default Post;

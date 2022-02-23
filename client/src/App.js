@@ -1,42 +1,29 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
 } from 'react-router-dom';
 import Header from './components/Header/Header';
-import News from './screens/News';
-import Register from './screens/Register';
-import Login from './screens/Login';
-import {connect} from 'react-redux';
-import {getPosts} from './redux/reducers/postReducer/postReducer';
-import {getMe} from './redux/reducers/userReducer/userReducer';
-import Post from './screens/Post';
+import LoginContainer from './screens/LoginContainer';
+import NewsContainer from './screens/NewsContainer';
+import PostContainer from './screens/PostContainer';
+import RegisterContainer from './screens/RegisterContainer';
 /* eslint-disable require-jsdoc */
-function App({getPosts, getMe}) {
-  useEffect(() => {
-    return getPosts();
-  }, []);
-  useEffect(() => {
-    return getMe();
-  }, []);
+function App({}) {
   return (
     <Router>
       <Header/>
       <Routes>
-        <Route path="/" element={<News/>}/>
+        <Route path="/" element={<NewsContainer/>}/>
         <Route path="/categories" element={<>Categories</>}/>
         <Route path="/personal-area" element={<>Personal area</>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/posts/:postId" element={<Post/>}/>
+        <Route path="/login" element={<LoginContainer/>}/>
+        <Route path="/register" element={<RegisterContainer/>}/>
+        <Route path="/posts/:postId" element={<PostContainer/>}/>
       </Routes>
     </Router>
   );
 }
 
-const AppContainer = connect(null, {
-  getPosts,
-  getMe,
-})(App);
-export default AppContainer;
+export default App;

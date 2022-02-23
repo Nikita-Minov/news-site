@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import profileIcon from '../../img/profile.svg';
 import ProfileBarContainer from './ProfileBarContainer';
 
-const ProfileMenu = () => {
-  const [profileBar, showProfileBar] = useState(0);
+const ProfileMenu = ({profileBar, showProfileBar, hideProfileBar}) => {
   return (
     <ProfileArea
-      onMouseEnter={()=> showProfileBar(1)}
-      onMouseLeave={()=> showProfileBar(0)}>
+      onMouseEnter={showProfileBar}
+      onMouseLeave={hideProfileBar}>
       <ProfileAreaLink>
         <ProfileAreaImg
           src={profileIcon}

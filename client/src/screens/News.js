@@ -1,21 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import NewsItem from '../components/News/NewsItem';
-import {getPosts} from '../redux/reducers/postReducer/postReducer';
-import {getMe} from '../redux/reducers/userReducer/userReducer';
-import {connect, useSelector} from 'react-redux';
-import AddPostWindow from '../components/News/AddPostWindow';
-const News = ({}) => {
-  const posts = useSelector((state) => {
-    return state.postReducer.posts;
-  });
-  const isAuth = useSelector((state) => {
-    return state.userReducer.isAuth;
-  });
-  const [addPostStatus, addPostStatusSet] = useState(0);
-  useEffect(() => {
-    document.title = 'Новости';
-  });
+import AddPostWindowContainer from '../components/News/AddPostWindowContainer';
+const News = ({isAuth, posts, addPostStatus, addPostStatusSet}) => {
   return (
     <NewsWrapper>
       {isAuth?
@@ -32,20 +19,11 @@ const News = ({}) => {
         />);
       })}
       {addPostStatus?
-       <AddPostWindow addPostStatusSet={addPostStatusSet} />:<></>}
+       <AddPostWindowContainer addPostStatusSet={addPostStatusSet} />:<></>}
     </NewsWrapper>
   );
 };
 
-const mstp = (state) => ({
-  posts: state.postReducer.posts,
-  isAuth: state.userReducer.isAuth,
-});
-
-const NewsContainer = connect(mstp, {
-  getPosts,
-  getMe,
-})(News);
 
 const NewsWrapper = styled.div`
   width: 70%;
@@ -67,4 +45,4 @@ const AddNewsBtn = styled.button`
   }
 `;
 
-export default NewsContainer;
+export default News;

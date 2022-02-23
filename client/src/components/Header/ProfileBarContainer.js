@@ -6,9 +6,9 @@ import ProfileBar from './ProfileBar';
 const ProfileBarContainer = ({}) => {
   const dispatch = useDispatch();
   const logOut = () => dispatch(logout());
-  // ПЕРЕДЕЛАТЬ С USE CALLBACK (И ДРУГИЕ)
-  const isAuth = useSelector((state) => state.userReducer.isAuth);
-  const username = useSelector((state) => state.userReducer.userInfo.username);
+  const [isAuth, username] = useSelector((state) => {
+    return [state.userReducer.isAuth, state.userReducer.userInfo.username];
+  });
   /* eslint react/prop-types: 0 */
   const authorizedLinks = [
     {name: username, url: '/profile', func: 0},

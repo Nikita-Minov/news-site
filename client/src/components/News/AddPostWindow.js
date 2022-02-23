@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import cross from '../../img/cross.png';
-import AddPostForm from './AddPostForm';
+import AddPostFormContainer from './AddPostFormContainer';
 
 const AddPostFWindow = ({addPostStatusSet}) => {
   return (
@@ -12,7 +12,7 @@ const AddPostFWindow = ({addPostStatusSet}) => {
         }}>
           <CrossImg src={cross} alt="cross" />
         </ModalWindowBtnClose>
-        <AddPostForm addPostStatusSet={addPostStatusSet} />
+        <AddPostFormContainer addPostStatusSet={addPostStatusSet} />
       </ModalWindow>
     </ModalWindowWrapper>
   );
