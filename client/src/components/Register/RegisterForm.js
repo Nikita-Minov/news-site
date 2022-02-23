@@ -1,8 +1,6 @@
 import React from 'react';
 import {Formik} from 'formik';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
-import {createUser} from '../../redux/usersReducer';
 import validator from '../../utils/validator';
 
 const RegisterForm = ({createUser}) => {
@@ -48,9 +46,6 @@ const RegisterForm = ({createUser}) => {
   );
 };
 
-const RegisterFormContainer = connect(null, {
-  createUser,
-})(RegisterForm);
 
 const InputArea = styled.form`
   width: 10%;
@@ -88,4 +83,4 @@ const StyledLabel = styled.label`
   left: 100px;
 `;
 
-export default RegisterFormContainer;
+export default RegisterForm;

@@ -2,7 +2,7 @@ import React from 'react';
 import {Formik} from 'formik';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {login, getMe} from '../../redux/usersReducer';
+import {login, getMe} from '../../redux/reducers/userReducer/userReducer';
 
 const LoginForm = ({login, getMe}) => {
   return (

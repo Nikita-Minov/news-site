@@ -2,7 +2,10 @@ import React from 'react';
 import {useFormik} from 'formik';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {createPost, getPosts} from '../../redux/postsReducer';
+import {
+  createPost,
+  getPosts,
+} from '../../redux/reducers/postReducer/postReducer';
 
 const AddPostForm = ({createPost, creatorId, addPostStatusSet, getPosts}) => {
   const formik = useFormik({
@@ -43,7 +46,7 @@ const AddPostForm = ({createPost, creatorId, addPostStatusSet, getPosts}) => {
 };
 
 const mstp = (state) => ({
-  creatorId: state.usersReducer.userInfo.userId,
+  creatorId: state.userReducer.userInfo.userId,
 });
 
 const AddPostFormContainer = connect(mstp, {

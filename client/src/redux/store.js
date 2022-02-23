@@ -1,11 +1,11 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
-import usersReducer from './usersReducer';
-import postsReducer from './postsReducer';
+import userReducer from './reducers/userReducer/userReducer';
+import postReducer from './reducers/postReducer/postReducer';
 import ReduxThunk from 'redux-thunk';
 
 const reducers = combineReducers({
-  usersReducer,
-  postsReducer,
+  userReducer,
+  postReducer,
 });
 
 

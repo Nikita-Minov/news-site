@@ -19,8 +19,9 @@ const Login = ({isAuth}) => {
 };
 
 const mstp = (state) => ({
-  isAuth: state.usersReducer.isAuth,
+  isAuth: state.userReducer.isAuth,
 });
+
 
 const LoginContainer = connect(mstp, {})(Login);
 

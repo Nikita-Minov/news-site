@@ -1,4 +1,4 @@
-import {usersAPI} from '../api/usersApi';
+import {usersAPI} from '../../../api/usersApi';
 const SET_USER = 'SET_USER';
 const SET_LOGIN = 'SET_LOGIN';
 
@@ -46,6 +46,7 @@ export const setLogin = (status) => {
 
 export const createUser = (username, password) => async (dispatch) => {
   await usersAPI.createAccount(username, password);
+  console.log('Create user');
 };
 
 export const login = (username, password) => async (dispatch) => {

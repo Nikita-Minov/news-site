@@ -14,6 +14,7 @@ class UsersController {
   }
   async createUser(req, res) {
     try {
+      console.log(req.body.username + req.body.password)
       const result = await userService.createUser(req.body.username,
           req.body.password);
       res.status(result.status).json({message: result.message});

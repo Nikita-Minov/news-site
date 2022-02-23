@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import profileIcon from '../../img/profile.svg';
-import ProfileBar from './ProfileBar';
+import ProfileBarContainer from './ProfileBarContainer';
 
 const ProfileMenu = () => {
   const [profileBar, showProfileBar] = useState(0);
@@ -13,7 +13,7 @@ const ProfileMenu = () => {
         <ProfileAreaImg
           src={profileIcon}
           alt="profileIcon"/>
-        {profileBar?<ProfileBar/>:<></>}
+        {profileBar?<ProfileBarContainer/>:<></>}
       </ProfileAreaLink>
     </ProfileArea>
   );

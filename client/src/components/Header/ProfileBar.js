@@ -1,20 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {logout} from '../../redux/usersReducer';
 
-const ProfileBar = ({isAuth, username, logout}) => {
-  /* eslint react/prop-types: 0 */
-  const authorizedLinks = [
-    {name: username, url: '/profile', func: 0},
-    {name: 'Закладки', url: '/bookmarks', func: 0},
-    {name: 'Выход', url: '/', func: logout},
-  ];
-  const noAuthorizedLinks = [
-    {name: 'Войти', url: '/login', func: 0},
-    {name: 'Регистрация', url: '/register', func: 0},
-  ];
+const ProfileBar = ({isAuth, authorizedLinks, noAuthorizedLinks}) => {
   return (
     <ProfileBarWrapper>
       <ProfileBarMenu>
@@ -42,15 +30,6 @@ const ProfileBar = ({isAuth, username, logout}) => {
     </ProfileBarWrapper>
   );
 };
-
-const mstp = (state) => ({
-  isAuth: state.usersReducer.isAuth,
-  username: state.usersReducer.userInfo.username,
-});
-
-const ProfileBarContainer = connect(mstp, {
-  logout,
-})(ProfileBar);
 
 const ProfileBarWrapper = styled.div`
   width: 150px;
@@ -93,4 +72,4 @@ const StyledLink = styled(Link)`
   color: #000000;
 `;
 
-export default ProfileBarContainer;
+export default ProfileBar;

@@ -7,6 +7,7 @@ const instance = axios.create({
 
 export const usersAPI = {
   createAccount(username, password) {
+    console.log(username + password);
     return instance
         .post('/users', {username, password})
         .then((res) => {

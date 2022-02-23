@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getPost} from '../redux/postsReducer';
+import {getPost} from '../redux/reducers/postReducer/postReducer';
 import {Link} from 'react-router-dom';
 import AddCommentForm from '../components/Post/AddCommentForm';
 
@@ -28,7 +28,7 @@ const Post = ({getPost, post}) => {
 };
 
 const mstp = (state) => ({
-  post: state.postsReducer.currentPost,
+  post: state.postReducer.currentPost,
 });
 
 const PostContainer = connect(mstp, {

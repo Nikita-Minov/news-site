@@ -9,8 +9,8 @@ import News from './screens/News';
 import Register from './screens/Register';
 import Login from './screens/Login';
 import {connect} from 'react-redux';
-import {getPosts} from './redux/postsReducer';
-import {getMe} from './redux/usersReducer';
+import {getPosts} from './redux/reducers/postReducer/postReducer';
+import {getMe} from './redux/reducers/userReducer/userReducer';
 import Post from './screens/Post';
 /* eslint-disable require-jsdoc */
 function App({getPosts, getMe}) {

@@ -1,11 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import NewsItem from '../components/News/NewsItem';
-import {getPosts} from '../redux/postsReducer';
-import {getMe} from '../redux/usersReducer';
-import {connect} from 'react-redux';
+import {getPosts} from '../redux/reducers/postReducer/postReducer';
+import {getMe} from '../redux/reducers/userReducer/userReducer';
+import {connect, useSelector} from 'react-redux';
 import AddPostWindow from '../components/News/AddPostWindow';
-const News = ({posts, isAuth}) => {
+const News = ({}) => {
+  const posts = useSelector((state) => {
+    return state.postReducer.posts;
+  });
+  const isAuth = useSelector((state) => {
+    return state.userReducer.isAuth;
+  });
   const [addPostStatus, addPostStatusSet] = useState(0);
   useEffect(() => {
     document.title = 'Новости';
@@ -32,8 +38,8 @@ const News = ({posts, isAuth}) => {
 };
 
 const mstp = (state) => ({
-  posts: state.postsReducer.posts,
-  isAuth: state.usersReducer.isAuth,
+  posts: state.postReducer.posts,
+  isAuth: state.userReducer.isAuth,
 });
 
 const NewsContainer = connect(mstp, {

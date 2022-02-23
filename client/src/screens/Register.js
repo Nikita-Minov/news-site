@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import RegisterForm from '../components/Register/RegisterForm';
+import RegisterFormContainer
+from '../components/Register/RegisterFormContainer';
 import {connect} from 'react-redux';
 import {Navigate} from 'react-router-dom';
 
@@ -13,7 +14,7 @@ const Register = ({isAuth}) => {
       <RegisterTitle>
         РЕГИСТРАЦИЯ
       </RegisterTitle>
-      <RegisterForm/>
+      <RegisterFormContainer/>
     </RegisterWrapper>
   );
 };
@@ -36,7 +37,7 @@ const RegisterTitle = styled.h1`
 `;
 
 const mstp = (state) => ({
-  isAuth: state.usersReducer.isAuth,
+  isAuth: state.userReducer.isAuth,
 });
 
 const RegisterContainer = connect(mstp, {})(Register);

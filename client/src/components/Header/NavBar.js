@@ -1,16 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
 
-const NavBar = ({isAuth}) => {
-  const headerMenuItems = [
-    {name: 'Главная', url: '/'},
-    {name: 'Категории', url: '/categories'},
-  ];
-  const authHeaderMenuItems = [
-    {name: 'Личный кабинет', url: '/personal-area'},
-  ];
+const NavBar = ({isAuth, headerMenuItems, authHeaderMenuItems}) => {
   return (
     <HeaderMenu>
       {headerMenuItems.map((item, key) => {
@@ -22,12 +14,6 @@ const NavBar = ({isAuth}) => {
     </HeaderMenu>
   );
 };
-
-const mstp = (state) => ({
-  isAuth: state.usersReducer.isAuth,
-});
-
-const NavBarContainer = connect(mstp, {})(NavBar);
 
 const HeaderMenu = styled.nav`
   width: 50%;
@@ -45,4 +31,4 @@ const StyledLink = styled(Link)`
   margin-right: 60px;
 `;
 
-export default NavBarContainer;
+export default NavBar;

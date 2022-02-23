@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
-import NavBar from './NavBar';
 import ProfileMenu from './ProfileMenu';
+import NavBarContainer from './NavBarContainer';
 const Header = () => {
   return (
     <HeaderWrapper>
-      <NavBar/>
+      <NavBarContainer/>
       <SearchInput />
       <ProfileMenu />
     </HeaderWrapper>

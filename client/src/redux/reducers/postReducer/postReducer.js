@@ -1,4 +1,4 @@
-import {postsAPI} from '../api/postsApi';
+import {postsAPI} from '../../../api/postsApi';
 
 const SET_POSTS = 'SET_POSTS';
 const SET_POST = 'SET_POST';
@@ -8,7 +8,7 @@ const initialState = {
   currentPost: {},
 };
 
-const postsReducer = (state = initialState, action) => {
+const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_POSTS: {
       return {
@@ -59,4 +59,4 @@ export const createPost = (postTitle,
 };
 
 
-export default postsReducer;
+export default postReducer;
